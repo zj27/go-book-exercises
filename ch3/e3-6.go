@@ -4,6 +4,7 @@ import (
 	"image"
 	"image/color"
 	"image/png"
+	"math"
 	"math/cmplx"
 	"os"
 )
@@ -18,7 +19,7 @@ func main() {
 	img := image.NewRGBA(image.Rect(0, 0, width, height))
 	for py := 0; py < height; py++ {
 		for px := 0; px < width; px++ {
-			z := supersampling(px, py, 2)
+			z := supersampling(px, py, 4)
 			img.Set(px, py, z)
 		}
 	}
@@ -26,21 +27,21 @@ func main() {
 }
 
 func supersampling(px int, py int, sub int) color.Color {
-	var r uint8 = 0
-	var g uint8 = 0
-	var b uint8 = 0
-	for i := 1; i <= sub/2; i++ {
-		for j := 1; j <= sub/2; j++ {
-			y := float64(py/i)/height*(ymax-ymin) + ymin
-			x := float64(px)/width*(xmax-xmin) + xmin
+	var r int = 0
+	var g int = 0
+	var b int = 0
+	for i := 1; i <= int(math.Sqrt(float64(sub))); i++ {
+		for j := 1; j <= int(math.Sqrt(float64(sub))); j++ {
+			y := float64(py+1/i)/height*(ymax-ymin) + ymin
+			x := float64(px+1/i)/width*(xmax-xmin) + xmin
 			z := complex(x, y)
 			t := mandelbrot(z)
-			r += t.R
-			g += t.G
-			b += t.B
+			r += int(t.R)
+			g += int(t.G)
+			b += int(t.B)
 		}
 	}
-	return color.RGBA{r / uint8(sub), g / uint8(sub), b / uint8(sub), 255}
+	return color.RGBA{uint8(r / sub), uint8(g / sub), uint8(b / sub), 255}
 }
 
 func mandelbrot(z complex128) color.RGBA {
@@ -56,5 +57,5 @@ func mandelbrot(z complex128) color.RGBA {
 			return color.RGBA{c, c, c, 255}
 		}
 	}
-	return color.RGBA{255, 255, 255, 255}
+	return color.RGBA{0, 0, 0, 255}
 }

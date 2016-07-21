@@ -13,13 +13,14 @@ func main() {
 	flag.Parse()
 	var s []byte
 	fmt.Scanln(&s)
-	var c []byte
 	if *m == "256" {
-		c = sha256.Sum256(s)
+		c := sha256.Sum256(s)
+		fmt.Printf("%x\n", c)
 	} else if *m == "384" {
-		c = sha512.Sum384(s)
+		c := sha512.Sum384(s)
+		fmt.Printf("%x\n", c)
 	} else if *m == "512" {
-		c = sha512.Sum512(s)
+		c := sha512.Sum512(s)
+		fmt.Printf("%x\n", c)
 	}
-	fmt.Printf("%x\n", c)
 }

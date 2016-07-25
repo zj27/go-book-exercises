@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/tgpl/ch2/popcount"
+
+	"github.com/zj27/go-book-exercises/ch2/popcount"
 )
 
 func main() {

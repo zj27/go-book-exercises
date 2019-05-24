@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/zj27/go-book-exercises/ch2/popcount"
+	"github.com/zj27/go-book-exercises/ch02/popcount"
 )
 
 func main() {

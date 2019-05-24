@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/zj27/go-book-exercises/ch4/github"
+	"github.com/zj27/go-book-exercises/ch04/github"
 )
 
 func main() {

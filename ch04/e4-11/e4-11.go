@@ -34,9 +34,11 @@ func main() {
 			log.Fatal(err)
 		}
 		fmt.Printf("#%d\n", item.Number)
-		fmt.Printf("User:\t%s\n", item.User.Login)
 		fmt.Printf("Title:\t%s\n", item.Title)
+		fmt.Printf("URL:\t%s\n", item.HTMLURL)
+		fmt.Printf("User:\t%s\t%s\n", item.User.Login, item.User.HTMLURL)
 		fmt.Printf("State:\t%s\n", item.State)
+		fmt.Printf("CreateTime:\t%s\n", item.CreatedAt)
 		fmt.Printf("Body:\n%s\n", item.Body)
 	} else {
 		fmt.Println("Usage:")
